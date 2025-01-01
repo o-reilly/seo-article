@@ -1,26 +1,28 @@
 import streamlit as st
 import openai
 import logging
+import os
 
-openai.api_key = "INSERT YOUR API KEY HERE"
+# openai.api_key = "INSERT YOUR API KEY HERE"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 st.title("SEO Article Writer with ChatGPT")
 
 def generate_article(keyword, writing_style, word_count):
-    return "This is a test article generated without making API calls."
-    # response = openai.ChatCompletion.create(
-    #     model="gpt-3.5-turbo",
-    #     messages=[
-    #             {"role": "user", "content": "Write a SEO optimized word article about " + keyword},
-    #             {"role": "user", "content": "The article should be " + writing_style},
-    #             {"role": "user", "content": "The article length should " + str(word_count)},
-    #         ]
-    # )
-    # result = ''
-    # for choice in response.choices:
-    #     result += choice.message.content
+    # return "This is a test article generated without making API calls."
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+                {"role": "user", "content": "Write a SEO optimized word article about " + keyword},
+                {"role": "user", "content": "The article should be " + writing_style},
+                {"role": "user", "content": "The article length should " + str(word_count)},
+            ]
+    )
+    result = ''
+    for choice in response.choices:
+        result += choice.message.content
 
-    # print(result)
-    # return result
+    print(result)
+    return result
 
 keyword = st.text_input("Enter a keyword:")
 writing_style = st.selectbox("Select writing style:", ["Casual", "Informative", "Witty"])

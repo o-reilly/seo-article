@@ -20,6 +20,11 @@ This project is a Streamlit application that generates SEO-optimized articles us
     pip install -r requirements.txt
     ```
 
+4. Create a `.env` file and insert your OpenAI API key:
+    ```sh
+    echo "OPENAI_API_KEY=your_openai_api_key" > .env
+    ```
+
 ## Usage
 
 1. Run the Streamlit application:
